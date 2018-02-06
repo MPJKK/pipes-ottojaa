@@ -8,6 +8,7 @@ export class MediaService {
 
   apiUrl = 'http://media.mw.metropolia.fi/wbma';
   mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+  logged = false;
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -20,29 +21,29 @@ export class MediaService {
     return this.http.post(this.apiUrl + '/users', user);
   }
 
-  loginUser(user) {
-    return this.http.post<Login>(this.apiUrl + '/login', user).
-        subscribe((response) => {
-          // Toimii: etusivulle
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['front']);
-        }, (error: HttpErrorResponse) => {
-          // Virhe: loginiin
-          this.router.navigate(['login']);
-        });
+  login(user) {
+    this.http.post<Login>(this.apiUrl + '/login', user).subscribe(response => {
+      console.log(response);
+      this.logged = true;
+      localStorage.setItem('token', response.token);
+      this.router.navigate(['front']);
+    }, (error: HttpErrorResponse) => {
+      console.log(error);
+      this.router.navigate(['login']);
+    });
   }
 
   getUserData(token) {
     const options = {
-      headers: new HttpHeaders().set('x-access-token', token)
+      headers: new HttpHeaders().set('x-access-token', token),
     };
     return this.http.get(this.apiUrl + '/users/user', options);
   }
 
-  upload(form: FormData, token) {
+  uploadMedia(token, fd) {
     const options = {
-      headers: new HttpHeaders().set('x-access-token', token)
+      headers: new HttpHeaders().set('x-access-token', token),
     };
-    return this.http.post(this.apiUrl + '/media', form, options);
+    return this.http.post(this.apiUrl + '/media', fd, options);
   }
 }
