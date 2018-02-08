@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       this.mediaService.getUserData(localStorage.getItem('token')).
           subscribe(response => {
             console.log(response);
+            this.mediaService.logged = true;
             this.router.navigate(['front']);
           }, (error: HttpErrorResponse) => {
             console.log(error);
