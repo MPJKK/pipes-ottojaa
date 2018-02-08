@@ -13,6 +13,9 @@ import {UploadComponent} from './upload/upload.component';
 import {MediaService} from './services/media.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {ThumbnailPipe} from './pipes/thumbnail.pipe';
+import {MatCardModule, MatGridListModule} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -23,12 +26,15 @@ import {FormsModule} from '@angular/forms';
     LoginComponent,
     LogoutComponent,
     UploadComponent,
+    ThumbnailPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatGridListModule,
+    MatCardModule,
   ],
   providers: [MediaService],
   bootstrap: [AppComponent],

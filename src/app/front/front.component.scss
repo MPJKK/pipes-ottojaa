@@ -4,6 +4,8 @@
   width: 100%;
   justify-content: space-evenly;
 
+
+
   >div {
     max-width: 320px;
 
@@ -11,6 +13,9 @@
       max-width: 100%;
     }
   }
-
+}
+.margin{
+  margin-right: 15%;
+  margin-left: 15%;
 }
 

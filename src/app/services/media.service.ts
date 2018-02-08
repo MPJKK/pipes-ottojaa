@@ -17,6 +17,11 @@ export class MediaService {
     return this.http.get(this.apiUrl + '/media');
   }
 
+  getThumb() {
+    return this.http.get(this.apiUrl + '/media?start=0&limit=10');
+
+  }
+
   newUser(user) {
     return this.http.post(this.apiUrl + '/users', user);
   }
